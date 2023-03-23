@@ -7,4 +7,9 @@ class ApplicationController < Sinatra::Base
     articles.to_json
   end
 
+  get "/articles/:id" do
+    article = Article.find(params[:id])
+    article.to_json
+  end
+
 end
