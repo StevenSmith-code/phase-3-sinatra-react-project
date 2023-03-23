@@ -18,6 +18,14 @@ class ApplicationController < Sinatra::Base
     article.to_json
   end
 
+  patch "/articles/:id" do
+    article = Article.find(params[:id])
+    article.update(
+      body: params[:body]
+    )
+    article.to_json
+  end
+
   post "/create_blog" do
     article = Article.create(
       author: params[:author],
