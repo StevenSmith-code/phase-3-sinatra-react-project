@@ -12,7 +12,7 @@ class ApplicationController < Sinatra::Base
     article.to_json
   end
 
-  destroy "/articles/:id" do
+  delete "/articles/:id" do
     article = Article.find(params[:id])
     article.destroy
     article.to_json
