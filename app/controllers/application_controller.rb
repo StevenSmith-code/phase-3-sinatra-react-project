@@ -12,6 +12,12 @@ class ApplicationController < Sinatra::Base
     article.to_json
   end
 
+  destroy "/articles/:id" do
+    article = Article.find(params[:id])
+    article.destroy
+    article.to_json
+  end
+
   post "/create_blog" do
     article = Article.create(
       author: params[:author],
