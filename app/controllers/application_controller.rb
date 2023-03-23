@@ -12,4 +12,13 @@ class ApplicationController < Sinatra::Base
     article.to_json
   end
 
+  post "/create_blog" do
+    article = Article.create(
+      author: params[:author],
+      title: params[:title],
+      body: params[:body]
+    )
+    article.to_json
+  end
+
 end
