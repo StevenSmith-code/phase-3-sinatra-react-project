@@ -12,6 +12,12 @@ class ApplicationController < Sinatra::Base
     article.to_json
   end
 
+  get "/articles/:id/comments" do
+    article = Article.find(params[:id])
+    comments = article.comments
+    comments.to_json
+  end
+
   delete "/articles/:id" do
     article = Article.find(params[:id])
     article.destroy
@@ -33,6 +39,18 @@ class ApplicationController < Sinatra::Base
       body: params[:body]
     )
     article.to_json
+  end
+
+  post '/articles/:id/comments' do
+    
+    article = Article.find(params[:id])
+    comment = article.comments.build(user: params[:user], comment: params[:comment])
+    
+    if comment.save
+      comment.to_json
+    else
+      { error: "Unable to create comment" }.to_json
+    end
   end
 
 end
